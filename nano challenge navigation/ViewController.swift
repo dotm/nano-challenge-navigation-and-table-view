@@ -9,7 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var name: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,6 +21,17 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func order(_ sender: UIButton) {
+        if let text = name.text, !text.isEmpty {
+            performSegue(withIdentifier: "goToOrderPage", sender: self)
+        }else{
+            return
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as? SecondViewController
+        destination?.name = self.name.text
+    }
 
 }
 
